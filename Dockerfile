@@ -1,4 +1,4 @@
-FROM alpine:3.18 as build-stage
+FROM alpine:3.19 as build-stage
 
 ENV \
   IDE_USER=ide \
@@ -66,6 +66,7 @@ RUN \
   sqlite-dev \
   tiff \
   tzdata \
+  unixodbc-dev=2.3.12-r0 \
   vips-dev \
   yaml-dev \
   zlib \
@@ -119,7 +120,7 @@ RUN \
     go install github.com/charmbracelet/glow@latest \
           && \
   echo "%%%%%%%%%%%%%%===> Go: usql" && \
-    go install -tags most github.com/xo/usql@v0.15.6 \
+    go install -tags 'most no_duckdb sqlite_app_armor sqlite_fts5 sqlite_introspect sqlite_json1 sqlite_math_functions sqlite_stat4 sqlite_userauth sqlite_vtable odbc adodb godror csvq sqlserver mysql postgres clickhouse' github.com/xo/usql@v0.19.1 \
           && \
   echo "%%%%%%%%%%%%%%===> Go: ultimate plumber" && \
     go install github.com/akavel/up@master \
@@ -134,6 +135,6 @@ RUN \
           && \
   echo "%%%%%%%%%%%%%%===> Done"
 
-FROM alpine:3.18
+FROM alpine:3.19
 
 COPY --from=build-stage /jasonben/ide/go /jasonben/ide/go
