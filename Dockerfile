@@ -133,6 +133,9 @@ RUN \
     doas rm -rf "$GOPATH/pkg" && \
     doas rm -rf "$IDE_HOME/.cache" \
           && \
+  echo "%%%%%%%%%%%%%%===> Go: gitmux" && \
+    go install github.com/arl/gitmux@latest \
+          && \
   echo "%%%%%%%%%%%%%%===> Done"
 
 FROM alpine:3.19
