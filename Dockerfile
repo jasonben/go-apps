@@ -1,4 +1,5 @@
-FROM alpine:3.19 as build-stage
+ARG ALPINE_VERSION=alpine:3.20
+FROM ${ALPINE_VERSION} as build-stage
 
 ENV \
   IDE_USER=ide \
@@ -136,8 +137,11 @@ RUN \
   echo "%%%%%%%%%%%%%%===> Go: gitmux" && \
     go install github.com/arl/gitmux@latest \
           && \
+  echo "%%%%%%%%%%%%%%===> Go: smug" && \
+    go install github.com/ivaaaan/smug@latest \
+          && \
   echo "%%%%%%%%%%%%%%===> Done"
 
-FROM alpine:3.19
+FROM ${ALPINE_VERSION}
 
 COPY --from=build-stage /jasonben/ide/go /jasonben/ide/go
