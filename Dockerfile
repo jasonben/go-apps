@@ -128,11 +128,6 @@ RUN \
           && \
   echo "%%%%%%%%%%%%%%===> Go: lazygit" && \
     go install github.com/jesseduffield/lazygit@latest \
-    && \
-    go clean -cache && \
-    doas rm -rf "$GOPATH/src" && \
-    doas rm -rf "$GOPATH/pkg" && \
-    doas rm -rf "$IDE_HOME/.cache" \
           && \
   echo "%%%%%%%%%%%%%%===> Go: gitmux" && \
     go install github.com/arl/gitmux@latest \
@@ -140,7 +135,12 @@ RUN \
   echo "%%%%%%%%%%%%%%===> Go: smug" && \
     go install github.com/ivaaaan/smug@latest \
           && \
-  echo "%%%%%%%%%%%%%%===> Done"
+  echo "%%%%%%%%%%%%%%===> Finishing: Cleanup" && \
+    go clean -cache && \
+    doas rm -rf "$GOPATH/src" && \
+    doas rm -rf "$GOPATH/pkg" && \
+    doas rm -rf "$IDE_HOME/.cache" \
+  echo "%%%%%%%%%%%%%%===> Finishing: Done"
 
 FROM ${ALPINE_VERSION}
 
