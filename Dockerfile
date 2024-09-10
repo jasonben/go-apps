@@ -1,5 +1,5 @@
 ARG ALPINE_VERSION=alpine:3.20
-FROM ${ALPINE_VERSION} as build-stage
+FROM ${ALPINE_VERSION} AS build-stage
 
 ENV \
   IDE_USER=ide \
@@ -134,6 +134,9 @@ RUN \
           && \
   echo "%%%%%%%%%%%%%%===> Go: smug" && \
     go install github.com/ivaaaan/smug@latest \
+          && \
+  echo "%%%%%%%%%%%%%%===> Go: fzf" && \
+    go install github.com/junegunn/fzf@latest \
           && \
   echo "%%%%%%%%%%%%%%===> Finishing: Cleanup" && \
     go clean -cache && \
