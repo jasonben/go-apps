@@ -1,4 +1,4 @@
-ARG ALPINE_VERSION=alpine:3.20
+ARG ALPINE_VERSION=alpine:3.21
 FROM ${ALPINE_VERSION} AS build-stage
 
 ENV \
